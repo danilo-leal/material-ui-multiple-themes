@@ -1,5 +1,4 @@
 import * as React from "react";
-import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
 import Card from "@mui/material/Card";
 import Checkbox from "@mui/material/Checkbox";
@@ -70,14 +69,7 @@ export default function SignInCard({ mode, toggleColorMode }: SignInCardProps) {
     >
       <Card
         variant="outlined"
-        sx={(theme) => ({
-          p: { xs: 2, sm: 4 },
-          width: { xs: "100%", sm: 450 },
-          // boxShadow:
-          //   theme.palette.mode === "light"
-          //     ? "rgba(0, 0, 0, 0.05) 0px 5px 15px 0px, rgba(25, 28, 33, 0.05) 0px 15px 35px -5px, rgba(0, 0, 0, 0.05) 0px 0px 0px 1px"
-          //     : "rgba(0, 0, 0, 0.5) 0px 5px 15px 0px, rgba(25, 28, 33, 0.08) 0px 15px 35px -5px, rgba(0, 0, 0, 0.05) 0px 0px 0px 1px",
-        })}
+        sx={{ p: { xs: 2, sm: 4 }, width: { xs: "100%", sm: 450 } }}
       >
         <Stack
           direction="row"
@@ -126,17 +118,12 @@ export default function SignInCard({ mode, toggleColorMode }: SignInCardProps) {
             />
           </FormControl>
           <FormControl>
-            <Box
-              sx={{
-                display: "flex",
-                justifyContent: "space-between",
-              }}
-            >
+            <Stack direction="row" justifyContent="space-between" mb={1}>
               <FormLabel htmlFor="password">Password</FormLabel>
               <Link href="/" variant="body2" sx={{ alignSelf: "baseline" }}>
                 Forgot your password?
               </Link>
-            </Box>
+            </Stack>
             <TextField
               error={passwordError}
               helperText={passwordErrorMessage}
@@ -164,13 +151,7 @@ export default function SignInCard({ mode, toggleColorMode }: SignInCardProps) {
           >
             Sign in
           </Button>
-          <Button
-            type="submit"
-            fullWidth
-            variant="outlined"
-            color="secondary"
-            onClick={validateInputs}
-          >
+          <Button type="submit" fullWidth variant="outlined" color="secondary">
             Don&apos;t have an account? Sign up
           </Button>
         </Stack>

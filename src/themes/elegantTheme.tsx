@@ -1,4 +1,3 @@
-import type {} from "@mui/material/themeCssVarsAugmentation";
 import { createTheme, ThemeOptions, alpha } from "@mui/material/styles";
 import { PaletteMode } from "@mui/material";
 import CheckBoxOutlineBlankRoundedIcon from "@mui/icons-material/CheckBoxOutlineBlankRounded";
@@ -78,11 +77,6 @@ export default function elegantTheme(mode: PaletteMode): ThemeOptions {
           dark: brand[900],
         }),
       },
-      warning: {
-        main: "#F7B538",
-        dark: "#F79F00",
-        ...(mode === "dark" && { main: "#F7B538", dark: "#F79F00" }),
-      },
       error: {
         light: red[50],
         main: red[500],
@@ -104,12 +98,6 @@ export default function elegantTheme(mode: PaletteMode): ThemeOptions {
         700: grey[700],
         800: grey[800],
         900: grey[900],
-      },
-      divider: mode === "dark" ? alpha(grey[600], 0.3) : alpha(grey[300], 0.5),
-      background: {
-        default: "#fff",
-        paper: grey[50],
-        ...(mode === "dark" && { default: grey[900], paper: grey[800] }),
       },
       text: {
         primary: grey[800],

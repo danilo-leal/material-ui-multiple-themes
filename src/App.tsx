@@ -1,7 +1,8 @@
 import * as React from "react";
-import { alpha, ThemeProvider, createTheme } from "@mui/material/styles";
+import { ThemeProvider, createTheme } from "@mui/material/styles";
 import { PaletteMode } from "@mui/material";
 import Box from "@mui/material/Box";
+import Stack from "@mui/material/Stack";
 import ToggleButton from "@mui/material/ToggleButton";
 import ToggleButtonGroup from "@mui/material/ToggleButtonGroup";
 
@@ -16,7 +17,7 @@ export default function App() {
     setMode((prev) => (prev === "dark" ? "light" : "dark"));
   };
 
-  const [themeIndex, setthemeIndex] = React.useState(2);
+  const [themeIndex, setthemeIndex] = React.useState(0);
   const themes = [
     createTheme(modernTheme(mode)),
     createTheme(elegantTheme(mode)),
@@ -45,11 +46,10 @@ export default function App() {
       >
         <SignInCard mode={mode} toggleColorMode={toggleColorMode} />
       </Box>
-      <Box
+      <Stack
+        direction="column"
+        alignItems="center"
         sx={{
-          display: "flex",
-          flexDirection: "column",
-          alignItems: "center",
           width: "100dvw",
           position: "fixed",
           bottom: 24,
@@ -59,14 +59,14 @@ export default function App() {
           exclusive
           value={themeIndex}
           onChange={handleThemeChange}
-          aria-label="theme selection"
+          aria-label="Theme selection"
         >
           <ToggleButton value={0}>Modern</ToggleButton>
           <ToggleButton value={1}>Elegant</ToggleButton>
           <ToggleButton value={2}>Playful</ToggleButton>
           <ToggleButton value={3}>Material 2</ToggleButton>
         </ToggleButtonGroup>
-      </Box>
+      </Stack>
     </ThemeProvider>
   );
 }
