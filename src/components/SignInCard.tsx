@@ -10,22 +10,30 @@ import Link from "@mui/material/Link";
 import TextField from "@mui/material/TextField";
 import Typography from "@mui/material/Typography";
 import Stack from "@mui/material/Stack";
+import IconButton from "@mui/material/IconButton";
+import ModeNightRoundedIcon from "@mui/icons-material/ModeNightRounded";
+import WbSunnyRoundedIcon from "@mui/icons-material/WbSunnyRounded";
 import { PaletteMode } from "@mui/material";
 
-import ForgotPassword from "./ForgotPassword";
-import ToggleColorMode from "./ModeToggle";
+// import ForgotPassword from "./ForgotPassword";
+// import ToggleColorMode from "./ModeToggle";
 
-export default function SignInCard() {
-  const [mode, setMode] = React.useState<PaletteMode>("light");
+interface SignInCardProps {
+  mode: PaletteMode;
+  toggleColorMode: () => void;
+}
+
+export default function SignInCard({ mode, toggleColorMode }: SignInCardProps) {
+  // const [mode, setMode] = React.useState<PaletteMode>("light");
   const [emailError, setEmailError] = React.useState(false);
   const [emailErrorMessage, setEmailErrorMessage] = React.useState("");
   const [passwordError, setPasswordError] = React.useState(false);
   const [passwordErrorMessage, setPasswordErrorMessage] = React.useState("");
   const [open, setOpen] = React.useState(false);
 
-  const toggleColorMode = () => {
-    setMode((prev) => (prev === "dark" ? "light" : "dark"));
-  };
+  // const toggleColorMode = () => {
+  //   setMode((prev) => (prev === "dark" ? "light" : "dark"));
+  // };
 
   const handleDialogOpen = () => {
     setOpen(true);
@@ -98,7 +106,17 @@ export default function SignInCard() {
           <Typography component="h1" variant="h5">
             Sign in to your account
           </Typography>
-          <ToggleColorMode mode={mode} toggleColorMode={toggleColorMode} />
+          <IconButton
+            color="primary"
+            aria-label="Theme toggle button"
+            onClick={toggleColorMode}
+          >
+            {mode === "dark" ? (
+              <WbSunnyRoundedIcon fontSize="small" />
+            ) : (
+              <ModeNightRoundedIcon fontSize="small" />
+            )}
+          </IconButton>
         </Stack>
         <Box
           component="form"

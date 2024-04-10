@@ -1,6 +1,7 @@
 import * as React from "react";
 import Stack from "@mui/material/Stack";
 import { alpha } from "@mui/material";
+import { PaletteMode } from "@mui/material";
 import { ThemeProvider, createTheme } from "@mui/material/styles";
 import ToggleButton from "@mui/material/ToggleButton";
 import ToggleButtonGroup from "@mui/material/ToggleButtonGroup";
@@ -10,8 +11,17 @@ import brutalTheme from "./themes/brutalTheme";
 import modernTheme from "./themes/modernTheme";
 
 export default function App() {
+  const [mode, setMode] = React.useState<PaletteMode>("light");
+  const toggleColorMode = () => {
+    setMode((prev) => (prev === "dark" ? "light" : "dark"));
+  };
+
   const [themeIndex, setthemeIndex] = React.useState(0);
-  const themes = [createTheme(), brutalTheme, modernTheme];
+  const themes = [
+    createTheme({ palette: { mode } }),
+    createTheme(brutalTheme(mode)),
+    createTheme(modernTheme(mode)),
+  ];
 
   const handleThemeChange = (
     event: React.MouseEvent<HTMLElement>,
@@ -41,7 +51,7 @@ export default function App() {
           pb: { xs: 12, sm: 0 },
         })}
       >
-        <SignInCard />
+        <SignInCard mode={mode} toggleColorMode={toggleColorMode} />
         <ToggleButtonGroup
           exclusive
           value={themeIndex}
