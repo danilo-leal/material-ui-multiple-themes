@@ -458,7 +458,7 @@ export default function modernTheme(mode: PaletteMode): ThemeOptions {
       MuiToggleButton: {
         styleOverrides: {
           root: ({ theme }) => ({
-            padding: "10px 14px 6px 14px",
+            padding: "12px 14px",
             textTransform: "none",
             fontWeight: 600,
             color: grey[800],
