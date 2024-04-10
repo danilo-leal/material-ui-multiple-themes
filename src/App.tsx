@@ -1,97 +1,62 @@
-import Box from "@mui/material/Box";
-import Card from "@mui/material/Card";
-import CardActions from "@mui/material/CardActions";
-import CardContent from "@mui/material/CardContent";
-import CardMedia from "@mui/material/CardMedia";
-import Button from "@mui/material/Button";
-import Typography from "@mui/material/Typography";
-import { ThemeProvider } from "@emotion/react";
-import theme from "./theme";
+import * as React from "react";
+import Stack from "@mui/material/Stack";
+import { alpha } from "@mui/material";
+import { ThemeProvider, createTheme } from "@mui/material/styles";
+import ToggleButton from "@mui/material/ToggleButton";
+import ToggleButtonGroup from "@mui/material/ToggleButtonGroup";
 
-export default function ImgMediaCard() {
+import SignInCard from "./components/SignInCard";
+import brutalTheme from "./themes/brutalTheme";
+import modernTheme from "./themes/modernTheme";
+
+export default function App() {
+  const [themeIndex, setthemeIndex] = React.useState(0);
+  const themes = [createTheme(), brutalTheme, modernTheme];
+
+  const handleThemeChange = (
+    event: React.MouseEvent<HTMLElement>,
+    newThemeIndex: number
+  ) => {
+    if (newThemeIndex !== null) {
+      setthemeIndex(newThemeIndex);
+    }
+  };
+
   return (
-    <Box
-      sx={{
-        p: 6,
-        height: "100vh",
-        width: "100vw",
-        display: "flex",
-        flexDirection: { xs: "column", sm: "row" },
-        alignItems: "center",
-        justifyContent: "center",
-        gap: 8,
-        backgroundColor: "hsla(0, 0%, 0%, .05)",
-      }}
-    >
-      <ThemeProvider theme={theme}>
-        <Card sx={{ maxWidth: 360 }}>
-          <CardMedia
-            component="img"
-            alt="green iguana"
-            height="140"
-            image="https://images.unsplash.com/photo-1711972495282-5e6d32c97ac1?q=80&w=4672&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
-          />
-          <CardContent>
-            <Typography gutterBottom variant="h5" component="div">
-              Lizard
-            </Typography>
-            <Typography variant="body2" color="text.secondary">
-              Lizards are a widespread group of squamate reptiles, with over
-              6,000 species, ranging across all continents except Antarctica
-            </Typography>
-          </CardContent>
-          <CardActions>
-            <Button variant="contained" size="small">
-              Share
-            </Button>
-            <Button variant="outlined" size="small">
-              Learn More
-            </Button>
-          </CardActions>
-        </Card>
-      </ThemeProvider>
-      <Card sx={{ maxWidth: 360 }}>
-        <CardMedia
-          component="img"
-          alt="green iguana"
-          height="140"
-          image="https://images.unsplash.com/photo-1711972495282-5e6d32c97ac1?q=80&w=4672&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
-        />
-        <CardContent>
-          <Typography gutterBottom variant="h5" component="div">
-            Lizard
-          </Typography>
-          <Typography variant="body2" color="text.secondary">
-            Lizards are a widespread group of squamate reptiles, with over 6,000
-            species, ranging across all continents except Antarctica
-          </Typography>
-        </CardContent>
-        <CardActions>
-          <Button size="small">Share</Button>
-          <Button size="small">Learn More</Button>
-        </CardActions>
-      </Card>
-      <Card sx={{ maxWidth: 360 }}>
-        <CardMedia
-          component="img"
-          alt="green iguana"
-          height="140"
-          image="https://images.unsplash.com/photo-1711972495282-5e6d32c97ac1?q=80&w=4672&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
-        />
-        <CardContent>
-          <Typography gutterBottom variant="h5" component="div">
-            Lizard
-          </Typography>
-          <Typography variant="body2" color="text.secondary">
-            Lizards are a widespread group of squamate reptiles, with over 6,000
-            species, ranging across all continents except Antarctica
-          </Typography>
-        </CardContent>
-        <CardActions>
-          <Button size="small">Share</Button>
-          <Button size="small">Learn More</Button>
-        </CardActions>
-      </Card>
-    </Box>
+    <ThemeProvider theme={themes[themeIndex]}>
+      <Stack
+        component="main"
+        direction="column"
+        justifyContent="space-between"
+        sx={(theme) => ({
+          backgroundImage:
+            theme.palette.mode === "light"
+              ? `linear-gradient(180deg, ${alpha("#CEE5FD", 0.2)}, #FFF)`
+              : `linear-gradient(${alpha("#02294F", 0.2)}, ${alpha(
+                  "#021F3B",
+                  0.0
+                )})`,
+          backgroundRepeat: "no-repeat",
+          height: { xs: "auto", sm: "100dvh" },
+          pb: { xs: 12, sm: 0 },
+        })}
+      >
+        <SignInCard />
+        <ToggleButtonGroup
+          exclusive
+          value={themeIndex}
+          onChange={handleThemeChange}
+          aria-label="theme selection"
+        >
+          <ToggleButton value={0}>Material 2</ToggleButton>
+          <ToggleButton value={1}>Brutal theme</ToggleButton>
+          <ToggleButton value={2}>Modern theme</ToggleButton>
+        </ToggleButtonGroup>
+      </Stack>
+      {/* <ToggleCustomTheme
+        showCustomTheme={showCustomTheme}
+        toggleCustomTheme={toggleCustomTheme}
+      /> */}
+    </ThemeProvider>
   );
 }
