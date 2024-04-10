@@ -15,33 +15,16 @@ import ModeNightRoundedIcon from "@mui/icons-material/ModeNightRounded";
 import WbSunnyRoundedIcon from "@mui/icons-material/WbSunnyRounded";
 import { PaletteMode } from "@mui/material";
 
-// import ForgotPassword from "./ForgotPassword";
-// import ToggleColorMode from "./ModeToggle";
-
 interface SignInCardProps {
   mode: PaletteMode;
   toggleColorMode: () => void;
 }
 
 export default function SignInCard({ mode, toggleColorMode }: SignInCardProps) {
-  // const [mode, setMode] = React.useState<PaletteMode>("light");
   const [emailError, setEmailError] = React.useState(false);
   const [emailErrorMessage, setEmailErrorMessage] = React.useState("");
   const [passwordError, setPasswordError] = React.useState(false);
   const [passwordErrorMessage, setPasswordErrorMessage] = React.useState("");
-  const [open, setOpen] = React.useState(false);
-
-  // const toggleColorMode = () => {
-  //   setMode((prev) => (prev === "dark" ? "light" : "dark"));
-  // };
-
-  const handleDialogOpen = () => {
-    setOpen(true);
-  };
-
-  const handleDialogClose = () => {
-    setOpen(false);
-  };
 
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -81,27 +64,26 @@ export default function SignInCard({ mode, toggleColorMode }: SignInCardProps) {
 
   return (
     <Stack
+      alignItems="center"
       justifyContent="center"
       sx={{ height: { xs: "100%", sm: "100dvh" }, p: 2 }}
     >
       <Card
+        variant="outlined"
         sx={(theme) => ({
-          display: "flex",
-          flexDirection: "column",
-          alignSelf: "center",
-          width: { xs: "100%", sm: "450px" },
           p: { xs: 2, sm: 4 },
-          gap: 4,
-          boxShadow:
-            theme.palette.mode === "light"
-              ? "rgba(0, 0, 0, 0.05) 0px 5px 15px 0px, rgba(25, 28, 33, 0.05) 0px 15px 35px -5px, rgba(0, 0, 0, 0.05) 0px 0px 0px 1px"
-              : "rgba(0, 0, 0, 0.5) 0px 5px 15px 0px, rgba(25, 28, 33, 0.08) 0px 15px 35px -5px, rgba(0, 0, 0, 0.05) 0px 0px 0px 1px",
+          width: { xs: "100%", sm: 450 },
+          // boxShadow:
+          //   theme.palette.mode === "light"
+          //     ? "rgba(0, 0, 0, 0.05) 0px 5px 15px 0px, rgba(25, 28, 33, 0.05) 0px 15px 35px -5px, rgba(0, 0, 0, 0.05) 0px 0px 0px 1px"
+          //     : "rgba(0, 0, 0, 0.5) 0px 5px 15px 0px, rgba(25, 28, 33, 0.08) 0px 15px 35px -5px, rgba(0, 0, 0, 0.05) 0px 0px 0px 1px",
         })}
       >
         <Stack
           direction="row"
           justifyContent="space-between"
           alignItems="center"
+          sx={{ mb: 2 }}
         >
           <Typography component="h1" variant="h5">
             Sign in to your account
@@ -118,16 +100,12 @@ export default function SignInCard({ mode, toggleColorMode }: SignInCardProps) {
             )}
           </IconButton>
         </Stack>
-        <Box
+        <Stack
           component="form"
+          direction="column"
+          gap={2}
           onSubmit={handleSubmit}
           noValidate
-          sx={{
-            display: "flex",
-            flexDirection: "column",
-            width: "100%",
-            gap: 2,
-          }}
         >
           <FormControl>
             <FormLabel htmlFor="email">Email</FormLabel>
@@ -155,12 +133,7 @@ export default function SignInCard({ mode, toggleColorMode }: SignInCardProps) {
               }}
             >
               <FormLabel htmlFor="password">Password</FormLabel>
-              <Link
-                component="button"
-                onClick={handleDialogOpen}
-                variant="body2"
-                sx={{ alignSelf: "baseline" }}
-              >
+              <Link href="/" variant="body2" sx={{ alignSelf: "baseline" }}>
                 Forgot your password?
               </Link>
             </Box>
@@ -183,7 +156,6 @@ export default function SignInCard({ mode, toggleColorMode }: SignInCardProps) {
             control={<Checkbox value="remember" color="primary" />}
             label="Remember me"
           />
-          {/* <ForgotPassword open={open} handleDialogClose={handleDialogClose} /> */}
           <Button
             type="submit"
             fullWidth
@@ -192,10 +164,16 @@ export default function SignInCard({ mode, toggleColorMode }: SignInCardProps) {
           >
             Sign in
           </Button>
-          <Link href="/" variant="body2" sx={{ alignSelf: "center" }}>
+          <Button
+            type="submit"
+            fullWidth
+            variant="outlined"
+            color="secondary"
+            onClick={validateInputs}
+          >
             Don&apos;t have an account? Sign up
-          </Link>
-        </Box>
+          </Button>
+        </Stack>
       </Card>
     </Stack>
   );

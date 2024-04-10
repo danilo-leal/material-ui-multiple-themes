@@ -22,16 +22,16 @@ declare module "@mui/material/styles/createPalette" {
 }
 
 export const brand = {
-  50: "hsl(210, 100%, 96%)",
-  100: "hsl(210, 100%, 90%)",
-  200: "hsl(210, 100%, 80%)",
-  300: "hsl(210, 100%, 65%)",
-  400: "hsl(210, 100%, 48%)",
-  500: "hsl(210, 100%, 40%)",
-  600: "hsl(210, 100%, 55%)",
-  700: "hsl(210, 100%, 35%)",
-  800: "hsl(210, 100%, 16%)",
-  900: "hsl(210, 100%, 21%)",
+  50: "hsl(320, 100%, 96%)",
+  100: "hsl(320, 100%, 91%)",
+  200: "hsl(320, 100%, 81%)",
+  300: "hsl(320, 100%, 65%)",
+  400: "hsl(320, 100%, 48%)",
+  500: "hsl(320, 100%, 41%)",
+  600: "hsl(320, 100%, 55%)",
+  700: "hsl(320, 100%, 35%)",
+  800: "hsl(320, 100%, 25%)",
+  900: "hsl(320, 100%, 18%)",
 };
 
 export const grey = {
@@ -60,22 +60,22 @@ export const red = {
   900: "hsl(0, 93%, 12%)",
 };
 
-const modernThemeCustom = createTheme();
+const playfulThemeCustom = createTheme();
 
-export default function modernTheme(mode: PaletteMode): ThemeOptions {
+export default function playfulTheme(mode: PaletteMode): ThemeOptions {
   return {
     palette: {
       mode,
       primary: {
-        light: brand[200],
-        main: brand[500],
-        dark: brand[800],
+        light: brand[500],
+        main: brand[600],
+        dark: brand[700],
         contrastText: brand[50],
         ...(mode === "dark" && {
           contrastText: brand[100],
           light: brand[300],
-          main: brand[400],
-          dark: brand[800],
+          main: brand[800],
+          dark: brand[900],
         }),
       },
       warning: {
@@ -105,6 +105,7 @@ export default function modernTheme(mode: PaletteMode): ThemeOptions {
         800: grey[800],
         900: grey[900],
       },
+      divider: mode === "dark" ? alpha(grey[600], 0.3) : alpha(grey[300], 0.5),
       background: {
         default: "#fff",
         paper: grey[50],
@@ -117,35 +118,35 @@ export default function modernTheme(mode: PaletteMode): ThemeOptions {
       },
     },
     typography: {
-      fontFamily: ['"Helvetica", "sans-serif"'].join(","),
+      fontFamily: ['"Verdana", "sans-serif"'].join(","),
       h1: {
-        fontSize: modernThemeCustom.typography.pxToRem(60),
+        fontSize: playfulThemeCustom.typography.pxToRem(60),
         lineHeight: 1.2,
       },
       h5: {
-        fontSize: modernThemeCustom.typography.pxToRem(20),
+        fontSize: playfulThemeCustom.typography.pxToRem(20),
         fontWeight: 600,
       },
       subtitle1: {
-        fontSize: modernThemeCustom.typography.pxToRem(18),
+        fontSize: playfulThemeCustom.typography.pxToRem(18),
       },
       subtitle2: {
-        fontSize: modernThemeCustom.typography.pxToRem(16),
+        fontSize: playfulThemeCustom.typography.pxToRem(16),
       },
       body1: {
-        fontSize: modernThemeCustom.typography.pxToRem(15),
+        fontSize: playfulThemeCustom.typography.pxToRem(15),
         fontWeight: 400,
       },
       body2: {
-        fontSize: modernThemeCustom.typography.pxToRem(14),
+        fontSize: playfulThemeCustom.typography.pxToRem(14),
         fontWeight: 400,
       },
       caption: {
-        fontSize: modernThemeCustom.typography.pxToRem(12),
+        fontSize: playfulThemeCustom.typography.pxToRem(12),
       },
     },
     shape: {
-      borderRadius: 12,
+      borderRadius: 99,
     },
     components: {
       MuiButtonBase: {
@@ -176,18 +177,10 @@ export default function modernTheme(mode: PaletteMode): ThemeOptions {
             ...(ownerState.variant === "contained" &&
               ownerState.color === "primary" && {
                 color: "white",
-                backgroundColor: brand[300],
-                backgroundImage: `linear-gradient(to bottom, ${alpha(
-                  brand[400],
-                  0.8
-                )}, ${brand[500]})`,
-                boxShadow: `inset 0 2px 0 ${alpha(
-                  brand[200],
-                  0.2
-                )}, inset 0 -2px 0 ${alpha(brand[700], 0.4)}`,
+                backgroundColor: brand[700],
                 border: `1px solid ${brand[500]}`,
                 "&:hover": {
-                  backgroundColor: brand[700],
+                  backgroundColor: brand[800],
                   boxShadow: "none",
                 },
                 "&:active": {
@@ -197,39 +190,31 @@ export default function modernTheme(mode: PaletteMode): ThemeOptions {
               }),
             ...(ownerState.variant === "outlined" &&
               ownerState.color === "secondary" && {
-                backgroundColor: alpha(grey[300], 0.1),
-                borderColor: alpha(grey[300], 0.5),
+                backgroundColor: alpha(brand[200], 0.1),
+                borderColor: alpha(brand[300], 0.2),
                 color: grey[700],
                 "&:hover": {
-                  backgroundColor: alpha(grey[300], 0.3),
-                  borderColor: alpha(grey[300], 0.5),
+                  backgroundColor: alpha(brand[300], 0.2),
+                  borderColor: alpha(brand[300], 0.5),
                   boxShadow: "none",
                 },
                 "&:active": {
-                  backgroundColor: alpha(grey[300], 0.4),
-                  boxShadow: `inset 0 2.5px 0 ${alpha(grey[400], 0.2)}`,
-                  backgroundImage: "none",
+                  backgroundColor: alpha(brand[300], 0.4),
                 },
               }),
             ...(theme.palette.mode === "dark" && {
               ...(ownerState.variant === "outlined" &&
                 ownerState.color === "secondary" && {
                   color: grey[300],
-                  backgroundColor: alpha(grey[600], 0.1),
-                  borderColor: alpha(grey[700], 0.5),
-                  boxShadow: `inset 0 2.5px ${alpha(
-                    grey[600],
-                    0.1
-                  )}, inset 0 -2px ${alpha(grey[900], 0.5)}`,
+                  backgroundColor: alpha(brand[700], 0.1),
+                  borderColor: alpha(brand[700], 0.5),
                   "&:hover": {
-                    backgroundColor: alpha(grey[700], 0.2),
-                    borderColor: alpha(grey[700], 0.5),
+                    backgroundColor: alpha(brand[700], 0.2),
+                    borderColor: alpha(brand[700], 0.5),
                     boxShadow: "none",
                   },
                   "&:active": {
-                    backgroundColor: alpha(grey[800], 0.2),
-                    boxShadow: `inset 0 2.5px 0 ${alpha(grey[900], 0.4)}`,
-                    backgroundImage: "none",
+                    backgroundColor: alpha(brand[800], 0.2),
                   },
                 }),
             }),
@@ -258,26 +243,23 @@ export default function modernTheme(mode: PaletteMode): ThemeOptions {
       MuiCard: {
         styleOverrides: {
           root: ({ theme, ownerState }) => ({
-            borderRadius: theme.shape.borderRadius,
+            borderRadius: 24,
             ...(ownerState.variant === "outlined" && {
               border: `1px solid ${grey[200]}`,
-              background: `linear-gradient(to bottom, #FFF, ${grey[50]})`,
-              boxShadow: `${alpha(grey[200], 0.5)} 0 4px 12px 0, ${alpha(
-                grey[200],
+              background: "#FFF",
+              boxShadow: `${alpha(brand[200], 0.5)} 0 2px 8px 0, ${alpha(
+                brand[200],
                 0.5
-              )} 0 12px 24px`,
+              )} 0 8px 14px`,
             }),
             ...(theme.palette.mode === "dark" && {
               ...(ownerState.variant === "outlined" && {
                 border: `1px solid ${grey[800]}`,
-                background: `linear-gradient(to bottom, ${grey[900]}, ${alpha(
-                  grey[800],
-                  0.2
-                )})`,
-                boxShadow: `${alpha(grey[900], 0.5)} 0 4px 12px 0, ${alpha(
-                  grey[900],
+                background: alpha(brand[900], 0.1),
+                boxShadow: `${alpha(brand[800], 0.5)} 0 2px 8px 0, ${alpha(
+                  brand[900],
                   0.5
-                )} 0 12px 24px`,
+                )} 0 8px 14px`,
               }),
             }),
           }),
@@ -469,9 +451,8 @@ export default function modernTheme(mode: PaletteMode): ThemeOptions {
       MuiToggleButton: {
         styleOverrides: {
           root: ({ theme }) => ({
-            padding: "10px 14px 6px 14px",
+            padding: "12px 14px",
             textTransform: "none",
-            fontWeight: 600,
             color: grey[800],
             "&.Mui-selected": {
               color: brand[700],

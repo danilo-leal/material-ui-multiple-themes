@@ -1,14 +1,14 @@
 import * as React from "react";
-import Stack from "@mui/material/Stack";
-import { alpha } from "@mui/material";
+import { alpha, ThemeProvider, createTheme } from "@mui/material/styles";
 import { PaletteMode } from "@mui/material";
-import { ThemeProvider, createTheme } from "@mui/material/styles";
+import Box from "@mui/material/Box";
 import ToggleButton from "@mui/material/ToggleButton";
 import ToggleButtonGroup from "@mui/material/ToggleButtonGroup";
 
 import SignInCard from "./components/SignInCard";
-import brutalTheme from "./themes/brutalTheme";
 import modernTheme from "./themes/modernTheme";
+import elegantTheme from "./themes/elegantTheme";
+import playfulTheme from "./themes/playfulTheme";
 
 export default function App() {
   const [mode, setMode] = React.useState<PaletteMode>("light");
@@ -16,11 +16,12 @@ export default function App() {
     setMode((prev) => (prev === "dark" ? "light" : "dark"));
   };
 
-  const [themeIndex, setthemeIndex] = React.useState(0);
+  const [themeIndex, setthemeIndex] = React.useState(2);
   const themes = [
-    createTheme({ palette: { mode } }),
-    createTheme(brutalTheme(mode)),
     createTheme(modernTheme(mode)),
+    createTheme(elegantTheme(mode)),
+    createTheme(playfulTheme(mode)),
+    createTheme({ palette: { mode } }),
   ];
 
   const handleThemeChange = (
@@ -34,39 +35,38 @@ export default function App() {
 
   return (
     <ThemeProvider theme={themes[themeIndex]}>
-      <Stack
+      <Box
         component="main"
-        direction="column"
-        justifyContent="space-between"
         sx={(theme) => ({
-          backgroundImage:
-            theme.palette.mode === "light"
-              ? `linear-gradient(180deg, ${alpha("#CEE5FD", 0.2)}, #FFF)`
-              : `linear-gradient(${alpha("#02294F", 0.2)}, ${alpha(
-                  "#021F3B",
-                  0.0
-                )})`,
-          backgroundRepeat: "no-repeat",
-          height: { xs: "auto", sm: "100dvh" },
+          backgroundColor: theme.palette.mode === "light" ? "#FFF" : "#000",
+          height: "100dvh",
           pb: { xs: 12, sm: 0 },
         })}
       >
         <SignInCard mode={mode} toggleColorMode={toggleColorMode} />
+      </Box>
+      <Box
+        sx={{
+          display: "flex",
+          flexDirection: "column",
+          alignItems: "center",
+          width: "100dvw",
+          position: "fixed",
+          bottom: 24,
+        }}
+      >
         <ToggleButtonGroup
           exclusive
           value={themeIndex}
           onChange={handleThemeChange}
           aria-label="theme selection"
         >
-          <ToggleButton value={0}>Material 2</ToggleButton>
-          <ToggleButton value={1}>Brutal theme</ToggleButton>
-          <ToggleButton value={2}>Modern theme</ToggleButton>
+          <ToggleButton value={0}>Modern</ToggleButton>
+          <ToggleButton value={1}>Elegant</ToggleButton>
+          <ToggleButton value={2}>Playful</ToggleButton>
+          <ToggleButton value={3}>Material 2</ToggleButton>
         </ToggleButtonGroup>
-      </Stack>
-      {/* <ToggleCustomTheme
-        showCustomTheme={showCustomTheme}
-        toggleCustomTheme={toggleCustomTheme}
-      /> */}
+      </Box>
     </ThemeProvider>
   );
 }

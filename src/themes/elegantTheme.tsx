@@ -22,16 +22,16 @@ declare module "@mui/material/styles/createPalette" {
 }
 
 export const brand = {
-  50: "hsl(210, 100%, 96%)",
-  100: "hsl(210, 100%, 90%)",
-  200: "hsl(210, 100%, 80%)",
-  300: "hsl(210, 100%, 65%)",
-  400: "hsl(210, 100%, 48%)",
-  500: "hsl(210, 100%, 40%)",
-  600: "hsl(210, 100%, 55%)",
-  700: "hsl(210, 100%, 35%)",
-  800: "hsl(210, 100%, 16%)",
-  900: "hsl(210, 100%, 21%)",
+  50: "hsl(0, 0%, 96%)",
+  100: "hsl(0, 0%, 90%)",
+  200: "hsl(0, 0%, 80%)",
+  300: "hsl(0, 0%, 65%)",
+  400: "hsl(0, 0%, 48%)",
+  500: "hsl(0, 0%, 40%)",
+  600: "hsl(0, 0%, 55%)",
+  700: "hsl(0, 0%, 35%)",
+  800: "hsl(0, 0%, 16%)",
+  900: "hsl(0, 0%, 21%)",
 };
 
 export const grey = {
@@ -60,22 +60,22 @@ export const red = {
   900: "hsl(0, 93%, 12%)",
 };
 
-const modernThemeCustom = createTheme();
+const elegantThemeCustom = createTheme();
 
-export default function modernTheme(mode: PaletteMode): ThemeOptions {
+export default function elegantTheme(mode: PaletteMode): ThemeOptions {
   return {
     palette: {
       mode,
       primary: {
-        light: brand[200],
-        main: brand[500],
+        light: brand[500],
+        main: brand[700],
         dark: brand[800],
         contrastText: brand[50],
         ...(mode === "dark" && {
           contrastText: brand[100],
           light: brand[300],
-          main: brand[400],
-          dark: brand[800],
+          main: brand[800],
+          dark: brand[900],
         }),
       },
       warning: {
@@ -105,6 +105,7 @@ export default function modernTheme(mode: PaletteMode): ThemeOptions {
         800: grey[800],
         900: grey[900],
       },
+      divider: mode === "dark" ? alpha(grey[600], 0.3) : alpha(grey[300], 0.5),
       background: {
         default: "#fff",
         paper: grey[50],
@@ -117,35 +118,35 @@ export default function modernTheme(mode: PaletteMode): ThemeOptions {
       },
     },
     typography: {
-      fontFamily: ['"Helvetica", "sans-serif"'].join(","),
+      fontFamily: ['"Georgia", "sans-serif"'].join(","),
       h1: {
-        fontSize: modernThemeCustom.typography.pxToRem(60),
+        fontSize: elegantThemeCustom.typography.pxToRem(60),
         lineHeight: 1.2,
       },
       h5: {
-        fontSize: modernThemeCustom.typography.pxToRem(20),
+        fontSize: elegantThemeCustom.typography.pxToRem(20),
         fontWeight: 600,
       },
       subtitle1: {
-        fontSize: modernThemeCustom.typography.pxToRem(18),
+        fontSize: elegantThemeCustom.typography.pxToRem(18),
       },
       subtitle2: {
-        fontSize: modernThemeCustom.typography.pxToRem(16),
+        fontSize: elegantThemeCustom.typography.pxToRem(16),
       },
       body1: {
-        fontSize: modernThemeCustom.typography.pxToRem(15),
+        fontSize: elegantThemeCustom.typography.pxToRem(15),
         fontWeight: 400,
       },
       body2: {
-        fontSize: modernThemeCustom.typography.pxToRem(14),
+        fontSize: elegantThemeCustom.typography.pxToRem(14),
         fontWeight: 400,
       },
       caption: {
-        fontSize: modernThemeCustom.typography.pxToRem(12),
+        fontSize: elegantThemeCustom.typography.pxToRem(12),
       },
     },
     shape: {
-      borderRadius: 12,
+      borderRadius: 1,
     },
     components: {
       MuiButtonBase: {
@@ -176,15 +177,11 @@ export default function modernTheme(mode: PaletteMode): ThemeOptions {
             ...(ownerState.variant === "contained" &&
               ownerState.color === "primary" && {
                 color: "white",
-                backgroundColor: brand[300],
+                backgroundColor: brand[800],
                 backgroundImage: `linear-gradient(to bottom, ${alpha(
-                  brand[400],
-                  0.8
-                )}, ${brand[500]})`,
-                boxShadow: `inset 0 2px 0 ${alpha(
-                  brand[200],
-                  0.2
-                )}, inset 0 -2px 0 ${alpha(brand[700], 0.4)}`,
+                  brand[800],
+                  0.5
+                )}, ${brand[900]})`,
                 border: `1px solid ${brand[500]}`,
                 "&:hover": {
                   backgroundColor: brand[700],
@@ -203,33 +200,23 @@ export default function modernTheme(mode: PaletteMode): ThemeOptions {
                 "&:hover": {
                   backgroundColor: alpha(grey[300], 0.3),
                   borderColor: alpha(grey[300], 0.5),
-                  boxShadow: "none",
                 },
                 "&:active": {
                   backgroundColor: alpha(grey[300], 0.4),
-                  boxShadow: `inset 0 2.5px 0 ${alpha(grey[400], 0.2)}`,
-                  backgroundImage: "none",
                 },
               }),
             ...(theme.palette.mode === "dark" && {
               ...(ownerState.variant === "outlined" &&
                 ownerState.color === "secondary" && {
                   color: grey[300],
-                  backgroundColor: alpha(grey[600], 0.1),
+                  backgroundColor: alpha(grey[700], 0.1),
                   borderColor: alpha(grey[700], 0.5),
-                  boxShadow: `inset 0 2.5px ${alpha(
-                    grey[600],
-                    0.1
-                  )}, inset 0 -2px ${alpha(grey[900], 0.5)}`,
                   "&:hover": {
                     backgroundColor: alpha(grey[700], 0.2),
                     borderColor: alpha(grey[700], 0.5),
-                    boxShadow: "none",
                   },
                   "&:active": {
                     backgroundColor: alpha(grey[800], 0.2),
-                    boxShadow: `inset 0 2.5px 0 ${alpha(grey[900], 0.4)}`,
-                    backgroundImage: "none",
                   },
                 }),
             }),
@@ -261,23 +248,14 @@ export default function modernTheme(mode: PaletteMode): ThemeOptions {
             borderRadius: theme.shape.borderRadius,
             ...(ownerState.variant === "outlined" && {
               border: `1px solid ${grey[200]}`,
-              background: `linear-gradient(to bottom, #FFF, ${grey[50]})`,
-              boxShadow: `${alpha(grey[200], 0.5)} 0 4px 12px 0, ${alpha(
-                grey[200],
-                0.5
-              )} 0 12px 24px`,
+              background: "#FFF",
+              boxShadow: `${alpha(grey[200], 0.5)} -12px 12px 0 0`,
             }),
             ...(theme.palette.mode === "dark" && {
               ...(ownerState.variant === "outlined" && {
                 border: `1px solid ${grey[800]}`,
-                background: `linear-gradient(to bottom, ${grey[900]}, ${alpha(
-                  grey[800],
-                  0.2
-                )})`,
-                boxShadow: `${alpha(grey[900], 0.5)} 0 4px 12px 0, ${alpha(
-                  grey[900],
-                  0.5
-                )} 0 12px 24px`,
+                background: "hsl(0, 0%, 2%)",
+                boxShadow: `${alpha(grey[800], 0.5)} -12px 12px 0 0`,
               }),
             }),
           }),
@@ -420,7 +398,7 @@ export default function modernTheme(mode: PaletteMode): ThemeOptions {
             marginRight: 8,
             height: 16,
             width: 16,
-            borderRadius: 6,
+            borderRadius: 2,
             backgroundColor: alpha(grey[100], 0.2),
             border: `1px solid ${grey[200]}`,
             "&:hover": {
@@ -469,12 +447,12 @@ export default function modernTheme(mode: PaletteMode): ThemeOptions {
       MuiToggleButton: {
         styleOverrides: {
           root: ({ theme }) => ({
-            padding: "10px 14px 6px 14px",
+            padding: "12px 14px",
             textTransform: "none",
             fontWeight: 600,
-            color: grey[800],
+            color: grey[500],
             "&.Mui-selected": {
-              color: brand[700],
+              color: brand[900],
               backgroundColor: brand[100],
             },
             ...(theme.palette.mode === "dark" && {
